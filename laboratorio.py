@@ -1,17 +1,34 @@
 import ply.lex as lex
 #import re
 
+reserved = {
+    'if'    : 'IF',
+    'then'  : 'THEN',
+    'while' : 'WHILE',
+    'type'  : 'TIPO',
+    'begin' : 'BEGIN',
+    'end'   : 'END',
+    'const' : 'CONSTANTE',
+    'var'   : 'VARIAVEL',
+    'integer': 'INTEGER',
+    'real'  : 'REAL',
+    'array' : 'ARRAY',
+    'record': 'RECORD',
+    'write' : 'WRITE',
+    'read'  : 'READ',
+    'else'  : 'ELSE',
+    'of'    : 'OF',
+    'function': 'FUNCAO'
 
-tokens = (
+
+
+}
+tokens = [
    'NUMBER',
-   'NUMBERPOINT',
-   'PLUS',
-   'MINUS',
-   'TIMES',
-   'DIVIDE',
    'LPAREN',
    'RPAREN',
-)
+   'ID'
+] + list(reserved.values())
 
 # Regular expression rules for simple tokens
 t_PLUS    = r'\+'
