@@ -25,6 +25,10 @@ reserved = {
 }
 tokens = [
    'NUMBER',
+   'PLUS',
+   'MINUS',
+   'TIMES',
+   'DIVIDE',
    'LPAREN',
    'RPAREN',
    'ID'
@@ -62,7 +66,7 @@ lexer = lex.lex()
 
 # Test it out
 data = '''
-3.2 + 4 * 10
+32 + 4 * 10
   + -20 *2
 '''
 
