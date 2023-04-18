@@ -40,7 +40,7 @@ tokens = [
    'DOTCOMMA',
    'DOTDOT',
    'LCOL',
-   'RCOL'
+   'RCOL',
    'ID'
 ] + list(reserved.values())
 
@@ -171,7 +171,7 @@ lexer = lex.lex()
 # Test it out
 data = '''
 #comentário
-(3.2 +4) * 10 paulo if
+(3.2 +4) * 10  if paulo
   + -20 *2
 '''
 
