@@ -31,6 +31,16 @@ tokens = [
    'DIVIDE',
    'LPAREN',
    'RPAREN',
+   'LJACARE',
+   'RJACARE',
+   'ATRIBUTION',
+   'EXCLA',
+   'DOT',
+   'COMMA',
+   'DOTCOMMA',
+   'DOTDOT',
+   'LCOL',
+   'RCOL'
    'ID'
 ] + list(reserved.values())
 
@@ -80,6 +90,56 @@ def t_RPAREN(t):
     r'\)'
     t.type = ')'
     return t
+
+def t_LJACARE(t):
+    r'\<'
+    t.type = '<'
+    return t
+
+def t_RJACARE(t):
+    r'\>'
+    t.type = '>'
+    return t
+
+def t_ATRIBUTION(t):
+    r'\='
+    t.type = '='
+    return t
+
+def t_EXLA(t):
+    r'\!'
+    t.type = '!'
+    return t
+
+def t_DOT(t):
+    r'\.'
+    t.type = '.'
+    return t
+
+def t_COMMA(t):
+    r'\,'
+    t.type = ','
+    return t
+
+def t_DOTCOMMA(t):
+    r'\;'
+    t.type = ';'
+    return t
+
+def t_DOTDOT(t):
+    r'\:'
+    t.type = ':'
+    return t
+
+def t_LCOL(t):
+    r'\['
+    t.type = '['
+    return t
+
+def t_RCOL(t):
+    r'\]'
+    t.type = ']'
+    return t
 #Ignore comments
 def t_COMMENT(t):
     r'\#.*'
@@ -113,6 +173,11 @@ data = '''
 #comentário
 (3.2 +4) * 10 paulo if
   + -20 *2
+'''
+
+#test literals
+lit = '''
++-*/><=!.,;:[]()
 '''
 
 # Give the lexer some input
