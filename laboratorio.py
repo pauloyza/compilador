@@ -2,6 +2,7 @@ import ply.lex as lex
 #import re
 
 reserved = {
+    
     'if'    : 'IF',
     'then'  : 'THEN',
     'while' : 'WHILE',
@@ -33,6 +34,7 @@ tokens = [
    'RPAREN',
    'LJACARE',
    'RJACARE',
+   'EQUAL',
    'ATRIBUTION',
    'EXCLA',
    'DOT',
@@ -99,6 +101,11 @@ def t_LJACARE(t):
 def t_RJACARE(t):
     r'\>'
     t.type = '>'
+    return t
+
+def t_EQUAL(t):
+    r'\=='
+    t.value = '=='
     return t
 
 def t_ATRIBUTION(t):
@@ -171,7 +178,7 @@ lexer = lex.lex()
 # Test it out
 data = '''
 #comentário
-(3.2 +4) * 10  if paulo
+(3.2 +4) * 10  if paulo = ==
   + -20 *2
 '''
 
