@@ -34,22 +34,52 @@ tokens = [
    'ID'
 ] + list(reserved.values())
 
+literals = "+-*/><=!.,;:[]()"
+
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
     t.type = reserved.get(t.value,'ID')    # Check for reserved words
     return t
 
+ 
 # Regular expression rules for simple tokens
-t_PLUS    = r'\+'
-t_MINUS   = r'-'
-t_TIMES   = r'\*'
-t_DIVIDE  = r'/'
-t_LPAREN  = r'\('
-t_RPAREN  = r'\)'
+#t_PLUS    = r'\+'
+#t_MINUS   = r'-'
+#t_TIMES   = r'\*'
+#t_DIVIDE  = r'/'
+#t_LPAREN  = r'\('
+#t_RPAREN  = r'\)'
 
-#others expressions
+#programming the literals:
+def t_PLUS(t):
+    r'\+'
+    t.type = '+'
+    return t
 
+def t_MINUS(t):
+    r'-'
+    t.type = '-'
+    return t
 
+def t_TIMES(t):
+    r'\*'
+    t.type = '*'
+    return t
+
+def t_DIVIDE(t):
+    r'/'
+    t.type = '/'
+    return t
+
+def t_LPAREN(t):
+    r'\('
+    t.type = '('
+    return t
+
+def t_RPAREN(t):
+    r'\)'
+    t.type = ')'
+    return t
 #Ignore comments
 def t_COMMENT(t):
     r'\#.*'
@@ -81,7 +111,7 @@ lexer = lex.lex()
 # Test it out
 data = '''
 #comentário
-3.2 +4 * 10 paulo if
+(3.2 +4) * 10 paulo if
   + -20 *2
 '''
 
