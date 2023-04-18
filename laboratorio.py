@@ -50,6 +50,12 @@ t_RPAREN  = r'\)'
 #others expressions
 
 
+#Ignore comments
+def t_COMMENT(t):
+    r'\#.*'
+    pass
+    # No return value. Token discarded
+
 # A regular expression rule with some action code
 def t_NUMBER(t):
     r'([0-9]*\.)*[0-9]+'
@@ -74,7 +80,8 @@ lexer = lex.lex()
 
 # Test it out
 data = '''
-3.2 +4 * 10 paulo
+#comentário
+3.2 +4 * 10 paulo if
   + -20 *2
 '''
 
