@@ -44,10 +44,11 @@ tokens = [
    'DOTDOT',
    'LCOL',
    'RCOL',
+   'QUOTATION',
    'ID'
 ] + list(reserved.values())
 
-literals = "+-*/><=!.,;:[]()"
+literals = '+-*/><=!.,;:[]()"'
 
 
 
@@ -142,6 +143,12 @@ def t_RCOL(t):
     r'\]'
     t.type = ']'
     return t
+
+def t_QUOTATION(t):
+    r'\"'
+    t.type = '"'
+    return t
+
 #Ignore comments
 def t_COMMENT(t):
     r'\#.*'
@@ -199,7 +206,7 @@ data = '''
 
 #test literals
 lit = '''
-+-*/><=!.,;:[]()
++-*/><=!.,;:[]()"
 '''
 
 
