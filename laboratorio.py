@@ -202,8 +202,20 @@ lit = '''
 +-*/><=!.,;:[]()
 '''
 
+
+def leiaArq(textao):
+    arq = open(textao, "r", encoding="utf-8")
+    linhas = arq.readlines()
+    datareal = ""
+    for linha in linhas:
+        datareal += linha 
+    return datareal   
+
 # Give the lexer some input
-lexer.input(data)
+#lexer.input(datareal)
+
+#Leitura Principal
+lexer.input(leiaArq("gram01.txt"))
 
 # Tokenize
 while True:
@@ -211,3 +223,6 @@ while True:
     if not tok: 
         break      # No more input
     print(tok)
+
+
+
