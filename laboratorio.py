@@ -48,10 +48,7 @@ tokens = [
 
 literals = "+-*/><=!.,;:[]()"
 
-def t_ID(t):
-    r'[a-zA-Z_][a-zA-Z_0-9]*'
-    t.type = reserved.get(t.value,'ID')    # Check for reserved words
-    return t
+
 
  
 # Regular expression rules for simple tokens
@@ -118,10 +115,7 @@ def t_EXLA(t):
     t.type = '!'
     return t
 
-def t_DOT(t):
-    r'\.'
-    t.type = '.'
-    return t
+
 
 def t_COMMA(t):
     r'\,'
@@ -159,6 +153,16 @@ def t_NUMBER(t):
     t.value = float(t.value)    
     return t
 
+def t_DOT(t):
+    r'\.'
+    t.type = '.'
+    return t
+
+def t_ID(t):
+    r'[a-zA-Z_][a-zA-Z_0-9]*'
+    t.type = reserved.get(t.value,'ID')    # Check for reserved words
+    return t
+
 # Define a rule so we can track line numbers
 def t_newline(t):
     r'\n+'
@@ -172,13 +176,14 @@ def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
 
+
 # Build the lexer
 lexer = lex.lex()
 
 # Test it out
 data = '''
 #comentário
-(3.2 +4) * 10  if paulo = ==
+(3.2 +4) * 10  if paulo = == .35
   + -20 *2
 '''
 
