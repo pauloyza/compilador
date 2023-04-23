@@ -26,6 +26,7 @@ reserved = {
 }
 tokens = [
    'NUMBER',
+   'DECIMER',
    'PLUS',
    'MINUS',
    'TIMES',
@@ -148,10 +149,19 @@ def t_COMMENT(t):
     # No return value. Token discarded
 
 # A regular expression rule with some action code
-def t_NUMBER(t):
-    r'([0-9]*\.)*[0-9]+'
+
+def t_DECIMER(t):
+    r'([0-9]*\.)[0-9]+'
     t.value = float(t.value)    
     return t
+
+
+def t_NUMBER(t):
+    r'[0-9]+'
+    t.value = int(t.value)    
+    return t
+
+
 
 def t_DOT(t):
     r'\.'
@@ -183,7 +193,7 @@ lexer = lex.lex()
 # Test it out
 data = '''
 #comentário
-(3.2 +4) * 10  if paulo = == .35
+(3.2 +4) * 10  if paulo = == 3.2.4
   + -20 *2
 '''
 
