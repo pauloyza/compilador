@@ -1,6 +1,7 @@
 import ply.lex as lex
+import ply.yacc as yacc
 #import re
-
+      
 reserved = {
     
     'if'    : 'IF',
@@ -35,7 +36,7 @@ tokens = [
    'RPAREN',
    'LJACARE',
    'RJACARE',
-   'DOTEQUAL',
+   'EQUAL',
    'ATRIBUTION',
    'EXCLA',
    'DOT',
@@ -102,6 +103,10 @@ def t_RJACARE(t):
     t.type = '>'
     return t
 
+def t_EQUAL(t):
+    r'\=='
+    t.value = '=='
+    return t
 
 def t_ATRIBUTION(t):
     r'\='
@@ -123,11 +128,6 @@ def t_COMMA(t):
 def t_DOTCOMMA(t):
     r'\;'
     t.type = ';'
-    return t
-
-def t_DOTEQUAL(t):
-    r'\:='
-    t.value = ':='
     return t
 
 def t_DOTDOT(t):
@@ -201,10 +201,13 @@ lexer = lex.lex()
 # Test it out
 data = '''
 #comentário
-(3.2 +4) * 10  if paulo = 3.2.4 @ :=
+(3.2 +4) * 10  if paulo = == 3.2.4 ..3 @
   + -20 *2
 '''
 
+data2 = '''
+3 + 4
+'''
 #test literals
 lit = '''
 +-*/><=!.,;:[]()"
@@ -220,7 +223,7 @@ def leiaArq(textao):
     return datareal   
 
 # Give the lexer some input
-lexer.input(data)
+lexer.input(data2)
 
 #Leitura Principal
 #lexer.input(leiaArq("gram01.txt"))
@@ -230,7 +233,17 @@ while True:
     tok = lexer.token()
     if not tok: 
         break      # No more input
-    print(tok)
+    #print(tok)    # print the tokens
+
+#####################################################################
+###################################################################
+
+#COMEÇO DO SINTATICO
+
+###################################################################
+#####################################################################
+
+#from calclex import tokens
 
 
 

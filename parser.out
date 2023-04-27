@@ -1,0 +1,336 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ARRAY
+    ATRIBUTION
+    COMMA
+    CONSTANTE
+    DECIMER
+    DIVIDE
+    DOT
+    DOTCOMMA
+    DOTDOT
+    ELSE
+    END
+    EQUAL
+    EXCLA
+    FUNCAO
+    ID
+    IF
+    INTEGER
+    LCOL
+    LJACARE
+    LPAREN
+    MINUS
+    OF
+    PLUS
+    QUOTATION
+    RCOL
+    READ
+    REAL
+    RECORD
+    RJACARE
+    RPAREN
+    THEN
+    TIMES
+    TIPO
+    VARIAVEL
+    WHILE
+    WRITE
+
+Grammar
+
+Rule 0     S' -> expression
+Rule 1     expression -> BEGIN
+Rule 2     expression -> expression + term
+Rule 3     expression -> expression - term
+Rule 4     expression -> term
+Rule 5     term -> term * factor
+Rule 6     term -> term / factor
+Rule 7     term -> factor
+Rule 8     factor -> NUMBER
+Rule 9     factor -> ( expression )
+
+Terminals, with rules where they appear
+
+(                    : 9
+)                    : 9
+*                    : 5
++                    : 2
+-                    : 3
+/                    : 6
+ARRAY                : 
+ATRIBUTION           : 
+BEGIN                : 1
+COMMA                : 
+CONSTANTE            : 
+DECIMER              : 
+DIVIDE               : 
+DOT                  : 
+DOTCOMMA             : 
+DOTDOT               : 
+ELSE                 : 
+END                  : 
+EQUAL                : 
+EXCLA                : 
+FUNCAO               : 
+ID                   : 
+IF                   : 
+INTEGER              : 
+LCOL                 : 
+LJACARE              : 
+LPAREN               : 
+MINUS                : 
+NUMBER               : 8
+OF                   : 
+PLUS                 : 
+QUOTATION            : 
+RCOL                 : 
+READ                 : 
+REAL                 : 
+RECORD               : 
+RJACARE              : 
+RPAREN               : 
+THEN                 : 
+TIMES                : 
+TIPO                 : 
+VARIAVEL             : 
+WHILE                : 
+WRITE                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 2 3 9 0
+factor               : 5 6 7
+term                 : 2 3 4 5 6
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . expression
+    (1) expression -> . BEGIN
+    (2) expression -> . expression + term
+    (3) expression -> . expression - term
+    (4) expression -> . term
+    (5) term -> . term * factor
+    (6) term -> . term / factor
+    (7) term -> . factor
+    (8) factor -> . NUMBER
+    (9) factor -> . ( expression )
+
+    BEGIN           shift and go to state 2
+    NUMBER          shift and go to state 5
+    (               shift and go to state 6
+
+    expression                     shift and go to state 1
+    term                           shift and go to state 3
+    factor                         shift and go to state 4
+
+state 1
+
+    (0) S' -> expression .
+    (2) expression -> expression . + term
+    (3) expression -> expression . - term
+
+    +               shift and go to state 7
+    -               shift and go to state 8
+
+
+state 2
+
+    (1) expression -> BEGIN .
+
+    +               reduce using rule 1 (expression -> BEGIN .)
+    -               reduce using rule 1 (expression -> BEGIN .)
+    $end            reduce using rule 1 (expression -> BEGIN .)
+    )               reduce using rule 1 (expression -> BEGIN .)
+
+
+state 3
+
+    (4) expression -> term .
+    (5) term -> term . * factor
+    (6) term -> term . / factor
+
+    +               reduce using rule 4 (expression -> term .)
+    -               reduce using rule 4 (expression -> term .)
+    $end            reduce using rule 4 (expression -> term .)
+    )               reduce using rule 4 (expression -> term .)
+    *               shift and go to state 9
+    /               shift and go to state 10
+
+
+state 4
+
+    (7) term -> factor .
+
+    *               reduce using rule 7 (term -> factor .)
+    /               reduce using rule 7 (term -> factor .)
+    +               reduce using rule 7 (term -> factor .)
+    -               reduce using rule 7 (term -> factor .)
+    $end            reduce using rule 7 (term -> factor .)
+    )               reduce using rule 7 (term -> factor .)
+
+
+state 5
+
+    (8) factor -> NUMBER .
+
+    *               reduce using rule 8 (factor -> NUMBER .)
+    /               reduce using rule 8 (factor -> NUMBER .)
+    +               reduce using rule 8 (factor -> NUMBER .)
+    -               reduce using rule 8 (factor -> NUMBER .)
+    $end            reduce using rule 8 (factor -> NUMBER .)
+    )               reduce using rule 8 (factor -> NUMBER .)
+
+
+state 6
+
+    (9) factor -> ( . expression )
+    (1) expression -> . BEGIN
+    (2) expression -> . expression + term
+    (3) expression -> . expression - term
+    (4) expression -> . term
+    (5) term -> . term * factor
+    (6) term -> . term / factor
+    (7) term -> . factor
+    (8) factor -> . NUMBER
+    (9) factor -> . ( expression )
+
+    BEGIN           shift and go to state 2
+    NUMBER          shift and go to state 5
+    (               shift and go to state 6
+
+    expression                     shift and go to state 11
+    term                           shift and go to state 3
+    factor                         shift and go to state 4
+
+state 7
+
+    (2) expression -> expression + . term
+    (5) term -> . term * factor
+    (6) term -> . term / factor
+    (7) term -> . factor
+    (8) factor -> . NUMBER
+    (9) factor -> . ( expression )
+
+    NUMBER          shift and go to state 5
+    (               shift and go to state 6
+
+    term                           shift and go to state 12
+    factor                         shift and go to state 4
+
+state 8
+
+    (3) expression -> expression - . term
+    (5) term -> . term * factor
+    (6) term -> . term / factor
+    (7) term -> . factor
+    (8) factor -> . NUMBER
+    (9) factor -> . ( expression )
+
+    NUMBER          shift and go to state 5
+    (               shift and go to state 6
+
+    term                           shift and go to state 13
+    factor                         shift and go to state 4
+
+state 9
+
+    (5) term -> term * . factor
+    (8) factor -> . NUMBER
+    (9) factor -> . ( expression )
+
+    NUMBER          shift and go to state 5
+    (               shift and go to state 6
+
+    factor                         shift and go to state 14
+
+state 10
+
+    (6) term -> term / . factor
+    (8) factor -> . NUMBER
+    (9) factor -> . ( expression )
+
+    NUMBER          shift and go to state 5
+    (               shift and go to state 6
+
+    factor                         shift and go to state 15
+
+state 11
+
+    (9) factor -> ( expression . )
+    (2) expression -> expression . + term
+    (3) expression -> expression . - term
+
+    )               shift and go to state 16
+    +               shift and go to state 7
+    -               shift and go to state 8
+
+
+state 12
+
+    (2) expression -> expression + term .
+    (5) term -> term . * factor
+    (6) term -> term . / factor
+
+    +               reduce using rule 2 (expression -> expression + term .)
+    -               reduce using rule 2 (expression -> expression + term .)
+    $end            reduce using rule 2 (expression -> expression + term .)
+    )               reduce using rule 2 (expression -> expression + term .)
+    *               shift and go to state 9
+    /               shift and go to state 10
+
+
+state 13
+
+    (3) expression -> expression - term .
+    (5) term -> term . * factor
+    (6) term -> term . / factor
+
+    +               reduce using rule 3 (expression -> expression - term .)
+    -               reduce using rule 3 (expression -> expression - term .)
+    $end            reduce using rule 3 (expression -> expression - term .)
+    )               reduce using rule 3 (expression -> expression - term .)
+    *               shift and go to state 9
+    /               shift and go to state 10
+
+
+state 14
+
+    (5) term -> term * factor .
+
+    *               reduce using rule 5 (term -> term * factor .)
+    /               reduce using rule 5 (term -> term * factor .)
+    +               reduce using rule 5 (term -> term * factor .)
+    -               reduce using rule 5 (term -> term * factor .)
+    $end            reduce using rule 5 (term -> term * factor .)
+    )               reduce using rule 5 (term -> term * factor .)
+
+
+state 15
+
+    (6) term -> term / factor .
+
+    *               reduce using rule 6 (term -> term / factor .)
+    /               reduce using rule 6 (term -> term / factor .)
+    +               reduce using rule 6 (term -> term / factor .)
+    -               reduce using rule 6 (term -> term / factor .)
+    $end            reduce using rule 6 (term -> term / factor .)
+    )               reduce using rule 6 (term -> term / factor .)
+
+
+state 16
+
+    (9) factor -> ( expression ) .
+
+    *               reduce using rule 9 (factor -> ( expression ) .)
+    /               reduce using rule 9 (factor -> ( expression ) .)
+    +               reduce using rule 9 (factor -> ( expression ) .)
+    -               reduce using rule 9 (factor -> ( expression ) .)
+    $end            reduce using rule 9 (factor -> ( expression ) .)
+    )               reduce using rule 9 (factor -> ( expression ) .)
+
