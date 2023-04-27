@@ -27,6 +27,7 @@ reserved = {
 tokens = [
    'NUMBER',
    'DECIMER',
+   'STRING',
    'PLUS',
    'MINUS',
    'TIMES',
@@ -145,10 +146,10 @@ def t_RCOL(t):
     t.type = ']'
     return t
 
-def t_QUOTATION(t):
-    r'\"'
-    t.type = '"'
-    return t
+#def t_QUOTATION(t):
+#    r'\"'
+#    t.type = '"'
+#    return t
 
 #Ignore comments
 def t_COMMENT(t):
@@ -174,6 +175,11 @@ def t_NUMBER(t):
 def t_DOT(t):
     r'\.'
     t.type = '.'
+    return t
+
+def t_STRING(t):
+    r'\".*?\"'
+    t.value = t.value[1:-1]
     return t
 
 def t_ID(t):
@@ -220,10 +226,10 @@ def leiaArq(textao):
     return datareal   
 
 # Give the lexer some input
-lexer.input(data)
+#lexer.input(data)
 
 #Leitura Principal
-#lexer.input(leiaArq("gram01.txt"))
+lexer.input(leiaArq("gram01.txt"))
 
 # Tokenize
 while True:
